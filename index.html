@@ -252,6 +252,21 @@ h2 span { color:var(--accent); }
 .brief-note{font-size:11px;color:var(--muted);line-height:1.75;margin:15px 0 0}
 @media(max-width:640px){.brief-fields{grid-template-columns:1fr}.brief-actions{flex-direction:column}.brief-actions .btn{width:100%}.quick-brief h3{font-size:18px}}
 
+
+.project-visual-business{background:radial-gradient(ellipse at 65% 75%,#266745 0%,#123c2b 53%,#092319 100%)}
+.bot-scene{position:absolute;inset:65px 20px 31px;display:flex;align-items:center;justify-content:center;gap:12px;transform:rotate(-2deg)}
+.bot-preview-phone{background:#0d2720;border:5px solid #07170f;box-shadow:0 16px 48px rgba(0,0,0,.35);border-radius:20px;width:172px;height:240px;padding:13px 10px;color:#e8fff1}
+.bot-preview-head{display:flex;gap:7px;align-items:center;border-bottom:1px solid #315b46;padding:0 0 10px;font-size:11px;font-weight:750}
+.bot-preview-head span:first-child{background:#328b63;border-radius:50%;width:23px;height:23px;display:grid;place-items:center}
+.bot-preview-bubble{background:#204633;border-radius:8px;margin:15px 0;padding:9px;color:#c8eed9;font-size:10px;line-height:1.55}
+.bot-preview-chip{border-radius:6px;border:1px solid #47916b;padding:6px 7px;color:#c8eed9;font-size:9px;margin-bottom:8px;text-align:center}
+.bot-preview-admin{background:#133726;border:1px solid #44795c;border-radius:13px;width:168px;min-height:154px;box-shadow:0 14px 38px rgba(0,0,0,.22);padding:14px 12px}
+.bot-preview-admin strong{display:block;color:#e5faec;font-size:12px;margin:0 0 9px}
+.bot-preview-order{background:#1d5038;border-radius:7px;color:#bdefd1;padding:9px;font-size:10px;margin-bottom:6px}
+.bot-preview-count{font-size:25px;font-weight:850;color:#82f6b0;margin:3px 0}
+@media(min-width:901px){.project-card.business-card{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}.business-card .project-visual{height:auto;min-height:335px;border-right:1px solid var(--border);border-bottom:0}.business-card .project-body{align-self:center}}
+@media(max-width:480px){.bot-scene{gap:8px;inset-inline:10px}.bot-preview-admin{width:142px}.bot-preview-phone{width:146px}}
+
 </style>
   <script>
 /**
@@ -319,7 +334,7 @@ window.PORTFOLIO_CONFIG = Object.freeze({
             <a class="btn btn-ghost" href="https://t.me/eywn88" target="_blank" rel="noopener noreferrer"><span data-i18n="heroContact">Связаться</span><span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-facts" aria-label="Ключевые факты">
-            <div><strong>02</strong><span data-i18n="heroFact1">собственных проекта</span></div>
+            <div><strong>03</strong><span data-i18n="heroFact1">собственных проекта</span></div>
             <div class="fact-sep" aria-hidden="true"></div>
             <div><strong>Python</strong><span data-i18n="heroFact2">основной язык</span></div>
           </div>
@@ -374,6 +389,28 @@ window.PORTFOLIO_CONFIG = Object.freeze({
               <div class="visual-meta" data-i18n="agentVisualTag">РЕАЛЬНЫЙ СКРИНШОТ</div>
             </div>
             <div class="project-body"><div class="project-overline"><span class="project-index">02 /</span><span data-i18n="projectBadge">ЛИЧНЫЙ ПРОЕКТ</span></div><h3>Agent Zero</h3><p data-i18n="agentDesc">Локальный AI-помощник для Windows: чат через Ollama, задачи и заметки с хранением в SQLite.</p><div class="tag-list"><span>Python</span><span>Ollama</span><span>SQLite</span><span>Tkinter</span></div><button class="project-more" type="button" data-project="agentzero"><span data-i18n="projectMore">Подробнее о проекте</span><span aria-hidden="true">↗</span></button></div>
+          </article>
+
+          <article class="project-card reveal business-card" data-category="telegram">
+            <div class="project-visual project-visual-business">
+              <div class="visual-head"><span>03 / TELEGRAM BUSINESS BOT</span><span class="visual-symbol" aria-hidden="true">↗</span></div>
+              <div class="bot-scene" aria-hidden="true">
+                <div class="bot-preview-phone">
+                  <div class="bot-preview-head"><span>✦</span> Business Assistant</div>
+                  <div class="bot-preview-bubble" data-i18n="bizBubble">Qanday xizmat kerak?</div>
+                  <div class="bot-preview-chip">Telegram Bot</div><div class="bot-preview-chip">Mini App</div>
+                </div>
+                <div class="bot-preview-admin"><strong data-i18n="bizAdmin">Admin panel</strong><div class="bot-preview-count">03</div><div class="bot-preview-order" data-i18n="bizRequest">Yangi so‘rov ✓</div><div class="bot-preview-order" data-i18n="bizCompleted">Bajarilgan ✓</div></div>
+              </div>
+              <div class="visual-meta" data-i18n="bizVisualTag">BRAUZER DEMOSI</div>
+            </div>
+            <div class="project-body"><div class="project-overline"><span class="project-index">03 /</span><span data-i18n="bizBadge">INTERAKTIV PROTOTIP</span></div>
+              <h3>Telegram Business Bot</h3>
+              <p data-i18n="bizDesc">Mijoz buyurtma qoldiradi, administrator uni kuzatadi va bajarilgan deb belgilaydi. Brauzerda sinash mumkin; Python bot kodi ham ochiq.</p>
+              <div class="tag-list"><span>Telegram Bot API</span><span>Python</span><span>SQLite</span><span>JavaScript</span></div>
+              <a class="project-more" href="./business-bot-demo.html"><span data-i18n="bizOpenDemo">Interaktiv demoni sinab ko‘rish</span><span aria-hidden="true">↗</span></a>
+              <a class="project-more" href="https://github.com/elyormakhmanazarov67-star/elyormakhmanazarov67-star.github.io/tree/main/business-bot" target="_blank" rel="noopener noreferrer"><span data-i18n="bizSource">Python kodini ko‘rish</span><span aria-hidden="true">↗</span></a>
+            </div>
           </article>
         </div>
         <div class="project-note reveal"><span class="note-icon" aria-hidden="true">✳</span><p data-i18n="projectNote">Кейс-стади показывает, какую проблему решает продукт, какие технологии использованы и что уже работает. Ссылки на закрытые репозитории и тестовые серверы не публикуются.</p></div>
@@ -499,8 +536,8 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       value1Title:'Практический подход',value1Text:'Сначала понимаю задачу, затем выбираю технологии. Сложность ради сложности — не мой стиль.',
       value2Title:'От идеи до запуска',value2Text:'Интерфейс, логика, данные, тестирование — смотрю на продукт целиком, а не на отдельный кусок кода.',
       value3Title:'Развитие через проекты',value3Text:'Мои лучшие примеры — собственные приложения, в которых можно увидеть реальные работающие функции.',
-      projectsKicker:'ПОРТФОЛИО',projectsTitle:'Выбранные <span>проекты.</span>',projectsIntro:'Два собственных продукта. Здесь показаны реальные интерфейсы; это не коммерческие заказы.',
-      filterAll:'Все проекты <span>02</span>',projectBadge:'ЛИЧНЫЙ ПРОЕКТ',projectMore:'Подробнее о проекте',
+      projectsKicker:'ПОРТФОЛИО',projectsTitle:'Выбранные <span>проекты.</span>',projectsIntro:"Три собственных проекта: два приложения и интерактивный прототип Business Bot. Это не коммерческие заказы.",
+      filterAll:"Все проекты <span>03</span>",bizBubble:"Какую услугу выберете?",bizAdmin:"Панель администратора",bizRequest:"Новая заявка ✓",bizCompleted:"Выполнено ✓",bizVisualTag:"БРАУЗЕРНОЕ ДЕМО",bizBadge:"ИНТЕРАКТИВНЫЙ ПРОТОТИП",bizDesc:"Клиент оставляет заявку, администратор видит и завершает её. Интерактивный браузерный пример плюс исходный код Telegram-бота на Python (требует отдельного запуска).",bizOpenDemo:"Попробовать интерактивное демо",bizSource:"Посмотреть Python-код",projectBadge:'ЛИЧНЫЙ ПРОЕКТ',projectMore:'Подробнее о проекте',
       medDesc:'Mini App для обучения: материалы, тесты, результаты и одобрение доступа. Собственный прототип с реальными экранами.',
       agentDesc:'Windows AI-помощник: локальный чат через Ollama, список задач и заметки в SQLite. Собственный проект.',
       medVisualTag:'РЕАЛЬНЫЙ СКРИНШОТ',agentVisualTag:'РЕАЛЬНЫЙ СКРИНШОТ',
@@ -575,8 +612,8 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       value1Title:'Amaliy yondashuv',value1Text:'Avval vazifani tushunaman, keyin mos texnologiyani tanlayman. Keraksiz murakkablikdan qochaman.',
       value2Title:'G‘oyadan ishga tushirishgacha',value2Text:'Interfeys, dastur mantig‘i, ma’lumotlar va sinov — mahsulotga yaxlit tizim sifatida qarayman.',
       value3Title:'Loyihalar orqali rivojlanish',value3Text:'Eng yaxshi namunalarim — ishlaydigan imkoniyatlarni ko‘rish mumkin bo‘lgan shaxsiy ilovalarim.',
-      projectsKicker:'PORTFOLIO',projectsTitle:'Tanlangan <span>loyihalar.</span>',projectsIntro:'Ikkita shaxsiy mahsulot. Bu yerda haqiqiy interfeyslar ko‘rsatilgan; ular buyurtma asosida bajarilgan tijoriy ishlar emas.',
-      filterAll:'Barcha loyihalar <span>02</span>',projectBadge:'SHAXSIY LOYIHA',projectMore:'Loyiha haqida batafsil',
+      projectsKicker:'PORTFOLIO',projectsTitle:'Tanlangan <span>loyihalar.</span>',projectsIntro:"Uchta shaxsiy loyiha: ikkita ilova va Telegram Business Bot interaktiv prototipi. Ular tijoriy buyurtmalar emas.",
+      filterAll:"Barcha loyihalar <span>03</span>",bizBubble:"Qanday xizmat kerak?",bizAdmin:"Administrator paneli",bizRequest:"Yangi so‘rov ✓",bizCompleted:"Bajarilgan ✓",bizVisualTag:"BRAUZER DEMOSI",bizBadge:"INTERAKTIV PROTOTIP",bizDesc:"Mijoz so‘rov yuboradi, administrator uni ko‘rib yakunlaydi. Brauzer demosini sinang, haqiqiy Python bot kodi ham mavjud (alohida ishga tushiriladi).",bizOpenDemo:"Interaktiv demoni sinash",bizSource:"Python kodini ko‘rish",projectBadge:'SHAXSIY LOYIHA',projectMore:'Loyiha haqida batafsil',
       medDesc:'Ta’lim uchun Mini App: materiallar, testlar, natijalar va kirishni tasdiqlash. Haqiqiy ekranlarga ega shaxsiy prototip.',
       agentDesc:'Windows AI-yordamchi: Ollama orqali mahalliy suhbat, vazifalar va SQLite bazasidagi qaydlar. Shaxsiy loyiha.',
       medVisualTag:'HAQIQIY SKRINSHOT',agentVisualTag:'HAQIQIY SKRINSHOT',
@@ -652,8 +689,8 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       value1Title:'Practical mindset',value1Text:'I start with the problem, then choose the tools. Complexity for its own sake is not the goal.',
       value2Title:'Idea to launch',value2Text:'UI, logic, data and testing — I look at the whole product, not just one part of the code.',
       value3Title:'Learning by building',value3Text:'My strongest examples are personal products with real, working functionality.',
-      projectsKicker:'PORTFOLIO',projectsTitle:'Selected <span>work.</span>',projectsIntro:'Two personal products. The screenshots are authentic; these are not paid client projects.',
-      filterAll:'All projects <span>02</span>',projectBadge:'PERSONAL PROJECT',projectMore:'Explore case study',
+      projectsKicker:'PORTFOLIO',projectsTitle:'Selected <span>work.</span>',projectsIntro:"Three personal projects: two apps and an interactive Business Bot prototype. These are not paid client projects.",
+      filterAll:"All projects <span>03</span>",bizBubble:"Which service do you need?",bizAdmin:"Admin dashboard",bizRequest:"New request ✓",bizCompleted:"Completed ✓",bizVisualTag:"BROWSER DEMO",bizBadge:"INTERACTIVE PROTOTYPE",bizDesc:"Customers submit requests and an admin completes them. Try the browser simulation and view the real Python bot source (runs separately with credentials).",bizOpenDemo:"Try the interactive demo",bizSource:"View Python source",projectBadge:'PERSONAL PROJECT',projectMore:'Explore case study',
       medDesc:'A learning Mini App with lessons, quizzes, results and access approval. An independent prototype with real screenshots.',
       agentDesc:'A Windows AI assistant with local Ollama chat, task management and SQLite notes. An independent project.',
       medVisualTag:'REAL SCREENSHOT',agentVisualTag:'REAL SCREENSHOT',
