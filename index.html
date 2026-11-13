@@ -166,6 +166,8 @@ h2 span { color:var(--accent); }
 .service-glyph {width:66px;height:66px;border:1px solid var(--border);background:var(--panel-2);border-radius:13px;display:grid;place-items:center;color:var(--accent);font-size:27px;}
 .service-row h3 {font-size:23px;letter-spacing:-.7px;margin:0 0 6px;}
 .service-row p {max-width:550px;font-size:14px;line-height:1.6;margin:0;color:var(--text-soft);}
+.service-row .service-price{display:inline-block;margin-top:9px;font-weight:800;font-size:16px;color:var(--accent);letter-spacing:.1px}
+.pricing-note{margin:18px 15px 0;max-width:800px;color:var(--text-soft);font-size:13px;line-height:1.7}
 .service-arrow {align-self:start;margin-top:10px;color:var(--accent);font-size:25px;}
 .process-section {background:var(--panel);}
 .process-grid {display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
@@ -421,10 +423,12 @@ window.PORTFOLIO_CONFIG = Object.freeze({
     <section class="section services-section" id="services" aria-labelledby="services-title">
       <div class="container"><div class="section-heading reveal"><span class="kicker"><span>03</span> / <span data-i18n="servicesKicker">ЧЕМ МОГУ ПОМОЧЬ</span></span><div class="heading-row"><h2 id="services-title" data-i18n="servicesTitle">Решения под <span>вашу задачу.</span></h2><p class="section-aside" data-i18n="servicesIntro">Небольшие и понятные проекты с прозрачным объёмом работ. Стоимость и сроки обсуждаются после технического задания.</p></div></div>
         <div class="service-list">
-          <article class="service-row reveal"><span class="service-no">01</span><span class="service-glyph" aria-hidden="true">⌘</span><div><h3 data-i18n="service1Title">Telegram-боты</h3><p data-i18n="service1Text">Меню, приём заявок, уведомления администратору, простые сценарии и интеграции.</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
-          <article class="service-row reveal"><span class="service-no">02</span><span class="service-glyph" aria-hidden="true">▣</span><div><h3>Telegram Mini Apps</h3><p data-i18n="service2Text">Удобные веб-интерфейсы внутри Telegram: формы, каталоги, тесты и личные кабинеты.</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
-          <article class="service-row reveal"><span class="service-no">03</span><span class="service-glyph" aria-hidden="true">✧</span><div><h3 data-i18n="service3Title">AI-инструменты и автоматизация</h3><p data-i18n="service3Text">AI-помощники, обработка данных и автоматизация повторяющихся задач.</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+          <article class="service-row reveal"><span class="service-no">01</span><span class="service-glyph" aria-hidden="true">⌘</span><div><h3 data-i18n="service1Title">Telegram-botlar</h3><p data-i18n="service1Text">Buyurtmalar va oddiy menyu.</p><p class="service-price" data-i18n="priceBot">550 000 so‘mdan</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+          <article class="service-row reveal"><span class="service-no">02</span><span class="service-glyph" aria-hidden="true">▣</span><div><h3>Telegram Mini Apps</h3><p data-i18n="service2Text">Oddiy MVP ilova.</p><p class="service-price" data-i18n="priceMini">1 590 000 so‘mdan</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+          <article class="service-row reveal"><span class="service-no">03</span><span class="service-glyph" aria-hidden="true">✧</span><div><h3 data-i18n="service3Title">Avtomatlashtirish</h3><p data-i18n="service3Text">Bir sodda jarayon.</p><p class="service-price" data-i18n="priceAuto">990 000 so‘mdan</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
+          <article class="service-row reveal"><span class="service-no">04</span><span class="service-glyph" aria-hidden="true">⌁</span><div><h3 data-i18n="service4Title">Veb-saytlar</h3><p data-i18n="service4Text">Moslashuvchan bir sahifali landing.</p><p class="service-price" data-i18n="priceWeb">990 000 so‘mdan</p></div><span class="service-arrow" aria-hidden="true">↗</span></article>
         </div>
+        <p class="pricing-note" data-i18n="pricingNote">Birinchi mijozlar uchun boshlang‘ich narxlar. Kichik loyiha hajmiga tegishli; domen, hosting, pullik API va murakkab integratsiyalar alohida. Yakuniy smeta ish hajmi kelishilgach tasdiqlanadi.</p>
       </div>
     </section>
 
@@ -546,7 +550,10 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       servicesKicker:'ЧЕМ МОГУ ПОМОЧЬ',servicesTitle:'Решения под <span>вашу задачу.</span>',servicesIntro:'Для начала — короткое ТЗ и понятный объём работ. После обсуждения предложу этапы, сроки и стоимость без лишних функций.',
       service1Title:'Telegram-боты',service1Text:'Бот принимает заявки, показывает меню и отправляет уведомления администратору. Подходит для услуг и небольших команд.',
       service2Text:'Мини-приложения внутри Telegram: каталог, формы, учебные тесты и личные разделы с сохранением данных.',
-      service3Title:'AI-инструменты и автоматизация',service3Text:'AI-помощники, напоминания и обработка данных. Сначала определяем, где автоматизация действительно полезна.',
+      service3Title:'Автоматизация',service3Text:'Один простой процесс, например сбор заявок в таблицу. AI и сложные интеграции оцениваются отдельно.',
+      service4Title:'Веб-сайты',service4Text:'Адаптивный одностраничный лендинг с контактами и заявкой.',
+      priceBot:'от 550 000 сум',priceMini:'от 1 590 000 сум',priceAuto:'от 990 000 сум',priceWeb:'от 990 000 сум',
+      pricingNote:'Стартовые цены для первых клиентов и небольших MVP. Домен, хостинг, платные API и сложные интеграции оплачиваются отдельно. Итоговая смета согласуется до начала работы.',
       processKicker:'ПОДХОД',processTitle:'Как строится работа.',process1Title:'Обсуждение',process1Text:'Уточняем задачу и ожидаемый результат.',
       process2Title:'План',process2Text:'Согласовываем функции, этапы и сроки.',process3Title:'Разработка',process3Text:'Создаю и показываю промежуточную версию.',
       process4Title:'Проверка',process4Text:'Тестируем и передаём согласованный результат.',
@@ -622,7 +629,10 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       servicesKicker:'QANDAY YORDAM BERA OLAMAN',servicesTitle:'Vazifangizga mos <span>yechimlar.</span>',servicesIntro:'Avval qisqa texnik topshiriq va aniq ish hajmini kelishamiz. Keyin bosqichlar, muddat va narxni taklif qilaman.',
       service1Title:'Telegram-botlar',service1Text:'Bot arizalarni qabul qiladi, xizmatlar menyusini ko‘rsatadi va administratorga xabar yuboradi. Kichik biznes uchun qulay.',
       service2Text:'Telegram ichidagi Mini App: kataloglar, shakllar, o‘quv testlari va ma’lumotlarni saqlaydigan shaxsiy bo‘limlar.',
-      service3Title:'AI vositalari va avtomatlashtirish',service3Text:'AI-yordamchilar, eslatmalar va ma’lumotlarni qayta ishlash. Avval avtomatlashtirish qayerda foyda berishini aniqlaymiz.',
+      service3Title:'Avtomatlashtirish',service3Text:'Bitta sodda jarayon: masalan, buyurtmalarni jadvalga yozish. AI va murakkab integratsiyalar alohida hisoblanadi.',
+      service4Title:'Veb-saytlar',service4Text:'Aloqa va buyurtma havolasi bilan moslashuvchan bir sahifali landing.',
+      priceBot:'550 000 so‘mdan',priceMini:'1 590 000 so‘mdan',priceAuto:'990 000 so‘mdan',priceWeb:'990 000 so‘mdan',
+      pricingNote:'Birinchi mijozlar uchun boshlang‘ich narxlar. Kichik MVP uchun; domen, hosting, pullik API va murakkab integratsiyalar alohida. Yakuniy smeta ish hajmi kelishilgach tasdiqlanadi.',
       processKicker:'ISH JARAYONI',processTitle:'Ish qanday olib boriladi?',process1Title:'Muhokama',process1Text:'Vazifa va kutilayotgan natijani aniqlaymiz.',
       process2Title:'Rejalashtirish',process2Text:'Funksiyalar, bosqichlar va muddatlarni kelishamiz.',process3Title:'Dasturlash',process3Text:'Ishlaydigan dastlabki versiyani yaratib, ko‘rsataman.',
       process4Title:'Tekshirish',process4Text:'Sinovdan o‘tkazib, kelishilgan natijani topshiramiz.',
@@ -699,7 +709,10 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       servicesKicker:'HOW I CAN HELP',servicesTitle:'Built around <span>your needs.</span>',servicesIntro:'We start with a short brief and a clear scope. Then I can propose milestones, a timeline and a quote without unnecessary features.',
       service1Title:'Telegram bots',service1Text:'Bots collect inquiries, display service menus and notify admins. Useful for services and small teams.',
       service2Text:'Telegram-native Mini Apps with catalogs, forms, educational quizzes and data-backed personal areas.',
-      service3Title:'AI tools and automation',service3Text:'AI assistants, reminders and data workflows. First we identify which repetitive tasks are worth automating.',
+      service3Title:'Automation',service3Text:'One simple process, such as sending requests to a spreadsheet. AI and advanced integrations are quoted separately.',
+      service4Title:'Websites',service4Text:'Responsive one-page landing page with contacts and an inquiry link.',
+      priceBot:'from 550,000 UZS',priceMini:'from 1,590,000 UZS',priceAuto:'from 990,000 UZS',priceWeb:'from 990,000 UZS',
+      pricingNote:'Introductory prices for first customers and small MVPs. Domains, hosting, paid APIs and complex integrations are extra. Final scope and quote are agreed before work starts.',
       processKicker:'PROCESS',processTitle:'How I approach a project.',process1Title:'Discovery',process1Text:'Clarify the problem and expected outcome.',
       process2Title:'Planning',process2Text:'Agree on features, milestones and timelines.',process3Title:'Building',process3Text:'Develop and demonstrate a working version.',
       process4Title:'Review',process4Text:'Test and hand over the agreed result.',
