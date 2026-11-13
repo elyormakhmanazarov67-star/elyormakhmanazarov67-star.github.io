@@ -7,7 +7,9 @@ A real Telegram bot prototype, separate from the interactive browser-only previe
 ## Nimalar ishlaydi?
 
 - /start — xizmatlar menyusi (veb-sayt, Telegram-bot, Mini App, avtomatlashtirish)
-- /services — xizmatlar tavsifi; narxlar loyiha hajmiga qarab kelishiladi
+- /services — xizmatlar tavsifi va boshlang‘ich narxlar (kichik MVP)
+- Birinchi mijozlar uchun narxlar: Veb-sayt 990 000 so‘mdan, Telegram-bot 550 000 so‘mdan, Mini App 1 590 000 so‘mdan, bitta sodda avtomatlashtirish 990 000 so‘mdan
+- Narxlarga domen, hosting, pullik API va murakkab integratsiyalar kirmaydi; narxlar loyiha hajmi aniqlangach tasdiqlanadi
 - /myorders — mijoz o‘zining oxirgi 5 ta buyurtmasi holatini ko‘radi
 - /contact — ELYOR.DEV bilan aloqa
 - Xizmat tanlash → qisqa tavsif yuborish → yangi buyurtmani saqlash
@@ -23,6 +25,10 @@ A real Telegram bot prototype, separate from the interactive browser-only previe
 Python 3.10+, Python standard library, sqlite3, Telegram Bot API (long polling).
 
 **Muhim:** brauzer demosi va haqiqiy bot bir-biriga ulanmagan. Brauzer demosidagi so‘rovlar serverga yuborilmaydi. Haqiqiy bot Railway hostingida ishlaydi: https://t.me/ElyorBusinessDemoBot.
+
+## Birinchi mijoz taklifi
+
+550 000 so‘mdan Telegram Business Bot taklifi: menyu, oddiy buyurtma qabul qilish, administrator xabari va buyurtma holati. Demo: https://t.me/ElyorBusinessDemoBot. Bu narx faqat kichik talablar to‘plami uchun; mijozga real ishga tushirishdan oldin maxfiylik, texnik qo‘llab-quvvatlash, qo‘shimcha servislar narxi va ma’lumotlarni boshqarish kelishiladi.
 
 ## Railway hosting
 
