@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from bot import create_connection, add_order, latest_orders, finish_order, stats, get_offset, set_offset
+from bot import create_connection, add_order, latest_orders, pending_orders, get_order, format_order, finish_order, stats, get_offset, set_offset
 
 
 class TestOrders(unittest.TestCase):
@@ -26,6 +26,16 @@ class TestOrders(unittest.TestCase):
         self.assertEqual(finish_order(self.con, first)["chat_id"], 111)
         self.assertEqual(stats(self.con), (2, 1, 1))
         self.assertIsNone(finish_order(self.con, 99))
+
+    def test_pending_and_full_order_detail(self):
+        one = add_order(self.con, 111, "Veb-sayt", "First sample order")
+        two = add_order(self.con, 222, "Telegram-bot", "Second sample order")
+        self.assertEqual([row["id"] for row in pending_orders(self.con)], [two, one])
+        self.assertEqual(get_order(self.con, one)["details"], "First sample order")
+        self.assertIn("First sample order", format_order(get_order(self.con, one), full=True))
+        self.assertIsNone(get_order(self.con, 999))
+        finish_order(self.con, one)
+        self.assertEqual([row["id"] for row in pending_orders(self.con)], [two])
 
     def test_offset(self):
         self.assertEqual(get_offset(self.con), 0)
