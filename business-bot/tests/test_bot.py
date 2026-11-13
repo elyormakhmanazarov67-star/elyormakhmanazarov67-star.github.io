@@ -62,6 +62,29 @@ class TestOrders(unittest.TestCase):
         self.assertIn("Narx:", services_catalog())
         self.assertIn("https://t.me/eywn88", services_catalog())
 
+    def test_introductory_prices_and_service_limits(self):
+        from bot import STARTING_PRICES, starting_price, PRICE_NOTE, SERVICES, SERVICE_DESCRIPTIONS
+        expected = {
+            "Veb-sayt": 990_000,
+            "Telegram-bot": 550_000,
+            "Mini App": 1_590_000,
+            "Avtomatlashtirish": 990_000,
+        }
+        self.assertEqual(STARTING_PRICES, expected)
+        self.assertEqual(set(SERVICES.values()), set(STARTING_PRICES))
+        self.assertEqual(set(SERVICES.values()), set(SERVICE_DESCRIPTIONS))
+        self.assertIn("550 000 so‘mdan", services_catalog())
+        self.assertIn("1 590 000 so‘mdan", services_catalog())
+        self.assertIn("990 000 so‘mdan", services_catalog())
+        self.assertIn("pullik API", PRICE_NOTE)
+        api = FakeTelegramApi()
+        sessions = {}
+        handle_message(
+            {"chat": {"id": 111}, "text": "🤖 Telegram-bot"},
+            api, self.con, 999, sessions
+        )
+        self.assertIn(starting_price("Telegram-bot"), api.messages[-1][1])
+
     def test_public_commands_and_admin_isolation(self):
         add_order(self.con, 111, "Veb-sayt", "Personal order")
         add_order(self.con, 222, "Telegram-bot", "Another person's order")
