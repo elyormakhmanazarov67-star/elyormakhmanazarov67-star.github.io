@@ -9,6 +9,9 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Elyor — Python & AI Developer">
   <meta property="og:description" content="От идеи до работающего продукта. Telegram-боты, Mini Apps и AI-инструменты.">
+  <link rel="canonical" href="https://elyormakhmanazarov67-star.github.io/">
+  <meta property="og:url" content="https://elyormakhmanazarov67-star.github.io/">
+  <meta name="twitter:card" content="summary">
   <title>Elyor — Python & AI Developer</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTUiIGZpbGw9IiMwODIwMTciLz48cGF0aCBkPSJtMjYgMTctMTMgMTUgMTMgMTVNMzggMTdsMTMgMTUtMTMgMTVNMzUgMTIgMjkgNTIiIHN0cm9rZT0iIzY4ZTZhYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48L3N2Zz4K" type="image/svg+xml">
   <style>
@@ -228,6 +231,26 @@ h2 span { color:var(--accent); }
 @media(max-width:960px){.use-cases-grid{grid-template-columns:1fr 1fr}.use-case-card:last-child{grid-column:1/-1;min-height:220px}.case-bottom{flex-wrap:wrap}.use-cases-section{padding-bottom:75px}}
 @media(max-width:600px){.use-cases-grid{grid-template-columns:1fr;gap:10px}.use-case-card,.use-case-card:last-child{min-height:auto;padding:23px 21px;grid-column:auto}.case-icon{margin-bottom:16px}.case-bottom{padding:20px;gap:18px}.case-bottom .btn{width:100%}.use-cases-section{padding-top:0;padding-bottom:55px}}
 
+
+/* Client brief builder — v1.3 */
+.quick-brief{margin-top:28px;border:1px solid var(--border);background:var(--panel);border-radius:14px;padding:clamp(18px,3vw,28px);max-width:810px}
+.quick-brief h3{font-size:20px;line-height:1.35;letter-spacing:-.3px;margin:0 0 9px}
+.quick-brief .brief-lead{font-size:13px;color:var(--text-soft);line-height:1.7;margin:0 0 23px}
+.brief-fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.brief-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.brief-field.wide{grid-column:1/-1}
+.brief-field label{font-size:12px;color:var(--text);font-weight:700}
+.brief-field select,.brief-field textarea,.brief-preview{width:100%;max-width:100%;min-width:0;border:1px solid var(--border);border-radius:9px;background:var(--panel-2);color:var(--text);padding:12px 14px;font:inherit;font-size:14px;line-height:1.5}
+.brief-field select{min-height:48px;cursor:pointer}
+.brief-field textarea{resize:vertical;min-height:114px}
+.brief-field select:focus-visible,.brief-field textarea:focus-visible,.brief-preview:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.brief-field select option{color:var(--text);background:var(--panel)}
+.brief-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.brief-preview-label{display:block;color:var(--text-soft);font-weight:700;font-size:12px;margin-top:19px;margin-bottom:8px}
+.brief-preview{white-space:pre-wrap;resize:vertical;min-height:128px}
+.brief-note{font-size:11px;color:var(--muted);line-height:1.75;margin:15px 0 0}
+@media(max-width:640px){.brief-fields{grid-template-columns:1fr}.brief-actions{flex-direction:column}.brief-actions .btn{width:100%}.quick-brief h3{font-size:18px}}
+
 </style>
   <script>
 /**
@@ -410,7 +433,43 @@ window.PORTFOLIO_CONFIG = Object.freeze({
     </section>
 
     <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-      <div class="container"><div class="contact-panel reveal"><div class="contact-orb" aria-hidden="true"></div><span class="kicker contact-kicker"><span>05</span> / <span data-i18n="contactKicker">НА СВЯЗИ</span></span><h2 id="contact-title"><span data-i18n="contactTitle1">Есть задача?</span><br><span data-i18n="contactTitle2">Давайте обсудим.</span></h2><p data-i18n="contactDescription">Расскажите, что вы хотите автоматизировать или разработать. Начнём с короткого описания идеи.</p><div class="contact-buttons"><a class="btn btn-primary" id="telegramContact" href="#contact" hidden target="_blank" rel="noopener noreferrer"><span data-i18n="contactTelegram">Написать в Telegram</span><span aria-hidden="true">↗</span></a><a class="btn btn-ghost contact-github" id="githubContact" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><button class="btn btn-outline" id="copyBrief" type="button"><span data-i18n="contactBrief">Скопировать шаблон ТЗ</span><span aria-hidden="true">⧉</span></button></div><p class="contact-disclaimer" id="contactNote" data-i18n="contactSetup">Контакт Telegram будет добавлен перед публикацией сайта. Сейчас доступны GitHub и шаблон описания проекта.</p></div></div>
+      <div class="container"><div class="contact-panel reveal"><div class="contact-orb" aria-hidden="true"></div><span class="kicker contact-kicker"><span>05</span> / <span data-i18n="contactKicker">НА СВЯЗИ</span></span><h2 id="contact-title"><span data-i18n="contactTitle1">Есть задача?</span><br><span data-i18n="contactTitle2">Давайте обсудим.</span></h2><p data-i18n="contactDescription">Расскажите, что вы хотите автоматизировать или разработать. Начнём с короткого описания идеи.</p>
+          <form id="quickBrief" class="quick-brief" aria-labelledby="briefHeading">
+            <h3 id="briefHeading" data-i18n="briefHeading">Короткая заявка на разработку</h3>
+            <p class="brief-lead" data-i18n="briefLead">Заполните три поля, скопируйте текст и отправьте мне в Telegram. Без регистрации.</p>
+            <div class="brief-fields">
+              <div class="brief-field">
+                <label for="briefType" data-i18n="briefType">Тип проекта</label>
+                <select id="briefType" required>
+                  <option value="" data-i18n="briefChoose">Выберите услугу</option>
+                  <option value="bot" data-i18n="briefBot">Telegram-бот</option>
+                  <option value="miniapp" data-i18n="briefMini">Telegram Mini App</option>
+                  <option value="ai" data-i18n="briefAi">AI / автоматизация</option>
+                  <option value="other" data-i18n="briefOther">Другая задача</option>
+                </select>
+              </div>
+              <div class="brief-field">
+                <label for="briefTimeline" data-i18n="briefTimeline">Желаемый срок</label>
+                <select id="briefTimeline">
+                  <option value="flex" data-i18n="briefFlex">Можно обсудить</option>
+                  <option value="week" data-i18n="briefWeek">Около недели</option>
+                  <option value="month" data-i18n="briefMonth">2–4 недели</option>
+                </select>
+              </div>
+              <div class="brief-field wide">
+                <label for="briefDescription" data-i18n="briefDescription">Что нужно сделать?</label>
+                <textarea id="briefDescription" name="project" required minlength="12" maxlength="800" rows="4" data-i18n-placeholder="briefPlaceholder" placeholder="Например: бот для записи клиентов с уведомлением администратора."></textarea>
+              </div>
+            </div>
+            <div class="brief-actions">
+              <button type="submit" class="btn btn-primary"><span data-i18n="briefCopy">Подготовить и скопировать</span><span aria-hidden="true">⧉</span></button>
+              <a class="btn btn-ghost" href="https://t.me/eywn88" target="_blank" rel="noopener noreferrer"><span data-i18n="briefOpenTelegram">Открыть Telegram</span><span aria-hidden="true">↗</span></a>
+            </div>
+            <label for="briefPreview" id="briefPreviewLabel" class="brief-preview-label" data-i18n="briefPreviewLabel" hidden>Готовый текст — при необходимости скопируйте вручную</label>
+            <textarea id="briefPreview" class="brief-preview" readonly rows="6" hidden aria-labelledby="briefPreviewLabel"></textarea>
+            <p class="brief-note" data-i18n="briefNotice">Сайт ничего не отправляет и не хранит. После копирования откройте Telegram и вставьте сообщение в чат.</p>
+          </form>
+<div class="contact-buttons"><a class="btn btn-primary" id="telegramContact" href="#contact" hidden target="_blank" rel="noopener noreferrer"><span data-i18n="contactTelegram">Написать в Telegram</span><span aria-hidden="true">↗</span></a><a class="btn btn-ghost contact-github" id="githubContact" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><button class="btn btn-outline" id="copyBrief" type="button"><span data-i18n="contactBrief">Скопировать шаблон ТЗ</span><span aria-hidden="true">⧉</span></button></div><p class="contact-disclaimer" id="contactNote" data-i18n="contactSetup">Контакт Telegram будет добавлен перед публикацией сайта. Сейчас доступны GitHub и шаблон описания проекта.</p></div></div>
     </section>
   </main>
 
@@ -457,6 +516,32 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       contactTelegram:'Написать в Telegram',contactBrief:'Скопировать шаблон ТЗ',
       contactSetup:'Контакт Telegram будет добавлен перед публикацией сайта. Сейчас доступны GitHub и шаблон описания проекта.',
       contactReady:'Контакт для заказов: @eywn88. Опишите задачу, и обсудим подходящий первый этап.',
+      briefHeading:"Короткая заявка на разработку",
+      briefLead:"Заполните три поля, скопируйте сообщение и отправьте его в Telegram. Без регистрации.",
+      briefType:"Тип проекта",
+      briefChoose:"Выберите услугу",
+      briefBot:"Telegram-бот",
+      briefMini:"Telegram Mini App",
+      briefAi:"AI / автоматизация",
+      briefOther:"Другая задача",
+      briefTimeline:"Желаемый срок",
+      briefFlex:"Можно обсудить",
+      briefWeek:"Около недели",
+      briefMonth:"2–4 недели",
+      briefDescription:"Что нужно сделать?",
+      briefPlaceholder:"Например: бот для записи клиентов с уведомлением администратора.",
+      briefCopy:"Подготовить и скопировать",
+      briefOpenTelegram:"Открыть Telegram",
+      briefPreviewLabel:"Готовый текст — при необходимости скопируйте вручную",
+      briefNotice:"Сайт ничего не отправляет и не хранит. После копирования откройте Telegram и вставьте сообщение в чат.",
+      briefGreeting:"Здравствуйте! Хочу обсудить разработку.",
+      briefLabelService:"Тип проекта",
+      briefLabelDetails:"Задача",
+      briefLabelTimeline:"Желаемый срок",
+      briefClosing:"Можете уточнить стоимость и следующие шаги?",
+      briefCopied:"Заявка скопирована! Откройте Telegram и вставьте её в чат.",
+      briefCopyFailed:"Сообщение готово ниже. Скопируйте текст вручную.",
+      briefTooShort:"Опишите задачу чуть подробнее (минимум 12 символов).",
       footer:'Создано с вниманием к деталям.',top:'Наверх',dialogKicker:'ПОДРОБНОСТИ ПРОЕКТА',
       dialogProblem:'Задача',dialogSolution:'Решение',dialogDone:'Что реализовано',dialogStatus:'Статус проекта',dialogNotice:'Скриншот реального интерфейса. Демоверсия и код могут быть доступны по запросу.',
       copied:'Шаблон описания проекта скопирован',copyFail:'Не удалось скопировать. Выделите текст вручную.',
@@ -507,6 +592,32 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       contactTelegram:'Telegram orqali yozish',contactBrief:'Texnik topshiriq namunasini nusxalash',
       contactSetup:'Sayt e’lon qilinishidan oldin Telegram aloqasi qo‘shiladi. Hozir GitHub va loyiha tavsifi namunasidan foydalanish mumkin.',
       contactReady:'Buyurtmalar uchun aloqa: @eywn88. Vazifani yozing, birinchi bosqichni muhokama qilamiz.',
+      briefHeading:"Loyiha uchun qisqa so‘rov",
+      briefLead:"Uchta maydonni to‘ldiring, matnni nusxalang va Telegram orqali yuboring. Ro‘yxatdan o‘tish shart emas.",
+      briefType:"Loyiha turi",
+      briefChoose:"Xizmatni tanlang",
+      briefBot:"Telegram-bot",
+      briefMini:"Telegram Mini App",
+      briefAi:"AI / avtomatlashtirish",
+      briefOther:"Boshqa vazifa",
+      briefTimeline:"Istalgan muddat",
+      briefFlex:"Kelishib olamiz",
+      briefWeek:"Taxminan bir hafta",
+      briefMonth:"2–4 hafta",
+      briefDescription:"Nima yaratish kerak?",
+      briefPlaceholder:"Masalan: mijozlarni ro‘yxatga oladigan va administratorga xabar beradigan bot.",
+      briefCopy:"Xabarni tayyorlash va nusxalash",
+      briefOpenTelegram:"Telegram’ni ochish",
+      briefPreviewLabel:"Tayyor xabar — kerak bo‘lsa qo‘lda nusxalang",
+      briefNotice:"Sayt ma’lumotlarni yubormaydi va saqlamaydi. Xabarni nusxalab, Telegram suhbatiga joylang.",
+      briefGreeting:"Assalomu alaykum! Dastur yaratish bo‘yicha murojaat qilmoqchiman.",
+      briefLabelService:"Loyiha turi",
+      briefLabelDetails:"Vazifa",
+      briefLabelTimeline:"Muddat",
+      briefClosing:"Taxminiy narx va keyingi qadamlarni ayta olasizmi?",
+      briefCopied:"So‘rov nusxalandi! Telegram’ni ochib, xabarni joylang.",
+      briefCopyFailed:"Xabar quyida tayyor. Matnni qo‘lda nusxalang.",
+      briefTooShort:"Vazifani biroz batafsilroq yozing (kamida 12 belgi).",
       footer:'Har bir detalga e’tibor bilan yaratildi.',top:'Yuqoriga',dialogKicker:'LOYIHA TAFSILOTLARI',
       dialogProblem:'Muammo',dialogSolution:'Yechim',dialogDone:'Amalga oshirilgan imkoniyatlar',dialogStatus:'Loyiha holati',dialogNotice:'Haqiqiy interfeys skrinshoti. Demo va kod so‘rov bo‘yicha taqdim etilishi mumkin.',
       copied:'Loyiha tavsifi namunasi nusxalandi',copyFail:'Nusxalab bo‘lmadi. Matnni qo‘lda belgilang.',
@@ -558,6 +669,32 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       contactTelegram:'Message on Telegram',contactBrief:'Copy project brief template',
       contactSetup:'A professional Telegram contact will be added before publication. GitHub and the brief template are available now.',
       contactReady:'Business contact: @eywn88. Share your project idea and we can discuss a practical first step.',
+      briefHeading:"Quick project inquiry",
+      briefLead:"Fill in three fields, copy your message, and send it via Telegram. No sign-up needed.",
+      briefType:"Project type",
+      briefChoose:"Choose a service",
+      briefBot:"Telegram bot",
+      briefMini:"Telegram Mini App",
+      briefAi:"AI / automation",
+      briefOther:"Something else",
+      briefTimeline:"Preferred timeline",
+      briefFlex:"Let's discuss",
+      briefWeek:"Around one week",
+      briefMonth:"2–4 weeks",
+      briefDescription:"What do you need built?",
+      briefPlaceholder:"For example: an appointment bot that notifies an administrator.",
+      briefCopy:"Prepare and copy message",
+      briefOpenTelegram:"Open Telegram",
+      briefPreviewLabel:"Prepared message — copy manually if needed",
+      briefNotice:"This website does not send or store your details. Copy the message and paste it into the Telegram chat.",
+      briefGreeting:"Hello! I'd like to discuss a software project.",
+      briefLabelService:"Project type",
+      briefLabelDetails:"Requirements",
+      briefLabelTimeline:"Preferred timeline",
+      briefClosing:"Could you suggest a price range and next steps?",
+      briefCopied:"Request copied! Open Telegram and paste it into the chat.",
+      briefCopyFailed:"Your message is ready below. Please copy it manually.",
+      briefTooShort:"Please describe your project in a bit more detail (at least 12 characters).",
       footer:'Built with care for the details.',top:'Back to top',dialogKicker:'PROJECT CASE STUDY',
       dialogProblem:'Challenge',dialogSolution:'Approach',dialogDone:'Implemented features',dialogStatus:'Project status',dialogNotice:'Authentic interface screenshot. Demo and code may be available on request.',
       copied:'Project brief template copied',copyFail:'Copy failed. Please select the text manually.',
@@ -625,6 +762,7 @@ window.PORTFOLIO_CONFIG = Object.freeze({
       if (richKeys.has(key)) el.innerHTML = value;
       else el.textContent = value;
     }
+    $('[data-i18n-placeholder]').forEach(el=>{const key=el.dataset.i18nPlaceholder; if(translations[currentLanguage][key]) el.placeholder=translations[currentLanguage][key];});
     languageSelect.value = currentLanguage;
     const t = translations[currentLanguage];
     languageSelect.setAttribute('aria-label',t.languageAria);
@@ -728,6 +866,36 @@ window.PORTFOLIO_CONFIG = Object.freeze({
   $('#dialogClose').addEventListener('click',()=>modal.close());
   modal.addEventListener('click',event=>{if(event.target===modal)modal.close();});
   modal.addEventListener('close',()=>{activeProject=null;});
+
+  const quickBrief = $('#quickBrief');
+  const briefDescription = $('#briefDescription');
+  briefDescription.addEventListener('input',()=>briefDescription.setCustomValidity(''));
+  quickBrief.addEventListener('submit',async event=>{
+    event.preventDefault();
+    const t = translations[currentLanguage];
+    const details = briefDescription.value.trim();
+    if(details.length < 12){briefDescription.setCustomValidity(t.briefTooShort);briefDescription.reportValidity();return;}
+    briefDescription.setCustomValidity('');
+    const service = $('#briefType').value;
+    const timing = $('#briefTimeline').value;
+    const serviceKeys = {bot:'briefBot',miniapp:'briefMini',ai:'briefAi',other:'briefOther'};
+    const timingKeys = {flex:'briefFlex',week:'briefWeek',month:'briefMonth'};
+    if(!serviceKeys[service]){ $('#briefType').reportValidity();return; }
+    const message = [
+      t.briefGreeting,
+      t.briefLabelService + ': ' + t[serviceKeys[service]],
+      t.briefLabelDetails + ': ' + details,
+      t.briefLabelTimeline + ': ' + t[timingKeys[timing] || 'briefFlex'],
+      t.briefClosing
+    ].join('\n');
+    const preview = $('#briefPreview');
+    preview.value = message;
+    preview.hidden = false;
+    $('#briefPreviewLabel').hidden = false;
+    const ok = await copyText(message);
+    showToast(t[ok ? 'briefCopied' : 'briefCopyFailed']);
+  });
+
   $('#copyBrief').addEventListener('click',async()=>{
     const text=translations[currentLanguage].brief;
     const ok=await copyText(text);
