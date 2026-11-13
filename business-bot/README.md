@@ -7,10 +7,13 @@ A real Telegram bot prototype, separate from the interactive browser-only previe
 ## Nimalar ishlaydi?
 
 - /start — xizmatlar menyusi (veb-sayt, Telegram-bot, Mini App, avtomatlashtirish)
+- /services — xizmatlar tavsifi; narxlar loyiha hajmiga qarab kelishiladi
+- /myorders — mijoz o‘zining oxirgi 5 ta buyurtmasi holatini ko‘radi
+- /contact — ELYOR.DEV bilan aloqa
 - Xizmat tanlash → qisqa tavsif yuborish → yangi buyurtmani saqlash
 - Buyurtmalar SQLite bazasiga yoziladi
 - Administratorga buyurtma haqida xabar yuboriladi
-- Administrator buyruqlari: /orders, /stats, /done N
+- Administrator buyruqlari: /orders, /pending, /order N, /stats, /done N
 - /cancel — jarayonni bekor qilish
 - /id — o‘z Telegram chat ID raqamingizni ko‘rsatadi
 - Qayta ishga tushirilganda buyurtmalar bazada qoladi
@@ -19,7 +22,17 @@ A real Telegram bot prototype, separate from the interactive browser-only previe
 
 Python 3.10+, Python standard library, sqlite3, Telegram Bot API (long polling).
 
-**Muhim:** brauzer demosi va haqiqiy bot bir-biriga ulanmagan. Brauzer demosidagi so‘rovlar serverga yuborilmaydi. Real bot uchun Telegram token va ishlayotgan kompyuter yoki hosting kerak.
+**Muhim:** brauzer demosi va haqiqiy bot bir-biriga ulanmagan. Brauzer demosidagi so‘rovlar serverga yuborilmaydi. Haqiqiy bot Railway hostingida ishlaydi: https://t.me/ElyorBusinessDemoBot.
+
+## Railway hosting
+
+Bot alohida `elyor-business-bot` loyihasining `telegram-business-bot` servisida ishlaydi. GitHub dagi `business-bot` papkasi root directory sifatida ko‘rsatilgan.
+
+- Start command: `python bot.py`
+- Environment variables: `BOT_TOKEN`, `ADMIN_CHAT_ID`, `BUSINESS_BOT_DB=/data/orders.sqlite3`
+- Persistent volume: `/data` (buyurtmalar va Telegram offseti saqlanadi)
+- Bitta Railway worker ishlatilsin. Shu token bilan mahalliy BAT/GUI botni bir vaqtning o‘zida yoqmang.
+- Maxfiy tokenni GitHub ga yoki ommaviy loglarga joylamang.
 
 ## Windows 11 da ishga tushirish
 
@@ -42,7 +55,7 @@ To‘xtatish: Ctrl+C.
 
 ## Cheklovlar
 
-- Bot long polling ishlatadi. Kompyuter o‘chirilsa bot ham to‘xtaydi.
+- Bot long polling ishlatadi. Faqat lokal ishga tushirilganda kompyuter o‘chsa bot to‘xtaydi; Railway hostingida bunday cheklov yo‘q (tarif, resurs va hosting mavjudligiga bog‘liq).
 - To‘lov, haqiqiy bron qilish, avtomatik server va reklama ommaviy xabarlari funksiyalari yo‘q.
 - Real foydalanuvchilar bilan ishga tushirishdan oldin maxfiylik, ma’lumotlarni o‘chirish, zaxiralash va hosting xavfsizligini alohida ishlab chiqish kerak.
 - Bot mijozlardan parol va boshqa maxfiy ma’lumotlarni so‘ramaydi.
