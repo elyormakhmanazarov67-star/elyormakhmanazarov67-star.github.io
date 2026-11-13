@@ -72,6 +72,28 @@ def latest_orders(con: sqlite3.Connection, limit: int = 10) -> list[sqlite3.Row]
     ).fetchall()
 
 
+def pending_orders(con: sqlite3.Connection, limit: int = 10) -> list[sqlite3.Row]:
+    return con.execute(
+        "SELECT * FROM orders WHERE status='new' ORDER BY id DESC LIMIT ?",
+        (limit,),
+    ).fetchall()
+
+
+def get_order(con: sqlite3.Connection, order_id: int) -> sqlite3.Row | None:
+    return con.execute("SELECT * FROM orders WHERE id=?", (order_id,)).fetchone()
+
+
+def format_order(row: sqlite3.Row, *, full: bool = False) -> str:
+    status = "🆕 Yangi" if row["status"] == "new" else "✅ Bajarilgan"
+    details = row["details"] if full else row["details"][:160]
+    return (
+        f"#{row['id']} | {row['service']} | {status}\n"
+        f"Chat ID: {row['chat_id']}\n"
+        f"Yaratilgan: {row['created_at']}\n"
+        f"So‘rov: {details}"
+    )
+
+
 def finish_order(con: sqlite3.Connection, order_id: int) -> sqlite3.Row | None:
     row = con.execute("SELECT * FROM orders WHERE id = ?", (order_id,)).fetchone()
     if row is None:
@@ -168,32 +190,40 @@ def handle_message(
         return
 
     # Admin-only commands. A stranger cannot read or change orders.
-    if text.startswith("/orders") or text.startswith("/stats") or text.startswith("/done"):
+    command = text.split(maxsplit=1)[0].split("@", 1)[0].lower()
+    if command in {"/orders", "/pending", "/order", "/stats", "/done"}:
         if chat_id != admin_chat_id:
             api.message(chat_id, "Bu buyruq faqat administrator uchun.")
             return
-        if text.startswith("/orders"):
-            rows = latest_orders(con)
+        if command in {"/orders", "/pending"}:
+            rows = pending_orders(con) if command == "/pending" else latest_orders(con)
             if not rows:
-                api.message(chat_id, "Hozircha buyurtmalar yo‘q.")
+                msg = "Yangi buyurtmalar yo‘q." if command == "/pending" else "Hozircha buyurtmalar yo‘q."
+                api.message(chat_id, msg)
                 return
-            lines = ["Oxirgi buyurtmalar:"]
-            for row in rows:
-                lines.append(
-                    f"#{row['id']} | {row['service']} | {row['status']}\n"
-                    f"Chat: {row['chat_id']}\n{row['details'][:160]}"
-                )
+            heading = "🆕 Yangi buyurtmalar:" if command == "/pending" else "📋 Oxirgi buyurtmalar:"
+            lines = [heading] + [format_order(row) for row in rows]
             api.message(chat_id, "\n\n".join(lines))
             return
-        if text.startswith("/stats"):
+        if command == "/stats":
             total, new, done = stats(con)
-            api.message(chat_id, f"📊 Jami: {total}\n🆕 Yangi: {new}\n✅ Bajarilgan: {done}")
+            api.message(
+                chat_id,
+                f"📊 Jami: {total}\n🆕 Yangi: {new}\n✅ Bajarilgan: {done}"
+                "\n\n/orders — oxirgi 10 ta\n/pending — faqat yangi buyurtmalar"
+            )
             return
         parts = text.split()
         if len(parts) != 2 or not parts[1].isdigit():
-            api.message(chat_id, "Foydalanish: /done 123")
+            example = "/order 123" if command == "/order" else "/done 123"
+            api.message(chat_id, f"Foydalanish: {example}")
             return
-        row = finish_order(con, int(parts[1]))
+        order_id = int(parts[1])
+        if command == "/order":
+            row = get_order(con, order_id)
+            api.message(chat_id, format_order(row, full=True) if row else "Bu raqamli buyurtma topilmadi.")
+            return
+        row = finish_order(con, order_id)
         if row is None:
             api.message(chat_id, "Bu raqamli buyurtma topilmadi.")
             return
@@ -216,7 +246,12 @@ def handle_message(
 
     if text.startswith("/start") or text.startswith("/help"):
         sessions.pop(chat_id, None)
-        api.message(chat_id, WELCOME, keyboard=menu())
+        greeting = WELCOME
+        if chat_id == admin_chat_id:
+            greeting += (
+                "\n\n👨‍💼 Admin: /orders, /pending, /order 1, /stats, /done 1"
+            )
+        api.message(chat_id, greeting, keyboard=menu())
         return
 
     if text in SERVICES:
