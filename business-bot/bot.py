@@ -25,10 +25,37 @@ SERVICES = {
     "📱 Mini App": "Mini App",
     "⚙️ Avtomatlashtirish": "Avtomatlashtirish",
 }
+SERVICE_DESCRIPTIONS = {
+    "Veb-sayt": "Portfolio, biznes sayti yoki xizmatlar sahifasi.",
+    "Telegram-bot": "Buyurtma qabul qilish, javoblar va oddiy avtomatlashtirish.",
+    "Mini App": "Telegram ichida ochiladigan kichik veb-ilova.",
+    "Avtomatlashtirish": "Takroriy vazifalarni soddalashtiradigan yechimlar.",
+}
+CONTACT_USERNAME = "eywn88"
+
+
+def services_catalog() -> str:
+    lines = ["📋 ELYOR.DEV xizmatlari:"]
+    for title, service in SERVICES.items():
+        lines.append(
+            f"\n{title}\n{SERVICE_DESCRIPTIONS[service]}\n"
+            "Narx: loyiha talablariga qarab kelishiladi."
+        )
+    lines.append(
+        "\nBuyurtma berish uchun menyudan xizmatni tanlang."
+        "\n💬 Aloqa: https://t.me/" + CONTACT_USERNAME
+    )
+    return "\n".join(lines)
+
+
 WELCOME = (
     "Assalomu alaykum! 👋\n"
     "Bu biznes uchun buyurtma qabul qiluvchi demo-bot.\n"
     "Quyidagi xizmatlardan birini tanlang.\n\n"
+    "Narxlar loyiha talabiga qarab kelishiladi.\n\n"
+    "/services — xizmatlar\n"
+    "/myorders — buyurtmalarim\n"
+    "/contact — aloqa\n"
     "/cancel — jarayonni bekor qilish"
 )
 
@@ -81,6 +108,25 @@ def pending_orders(con: sqlite3.Connection, limit: int = 10) -> list[sqlite3.Row
 
 def get_order(con: sqlite3.Connection, order_id: int) -> sqlite3.Row | None:
     return con.execute("SELECT * FROM orders WHERE id=?", (order_id,)).fetchone()
+
+
+def customer_orders(con: sqlite3.Connection, chat_id: int, limit: int = 5) -> list[sqlite3.Row]:
+    # Never return another customer's orders, even to a normal Telegram user.
+    return con.execute(
+        "SELECT id, service, status, created_at FROM orders "
+        "WHERE chat_id=? ORDER BY id DESC LIMIT ?",
+        (chat_id, limit),
+    ).fetchall()
+
+
+def format_customer_orders(rows: list[sqlite3.Row]) -> str:
+    if not rows:
+        return "📦 Sizda hali buyurtmalar yo‘q. Xizmat tanlab, so‘rov qoldirishingiz mumkin."
+    lines = ["📦 Oxirgi buyurtmalaringiz:"]
+    for row in rows:
+        status = "🆕 Yangi" if row["status"] == "new" else "✅ Bajarilgan"
+        lines.append(f"#{row['id']} · {row['service']} — {status}")
+    return "\n".join(lines)
 
 
 def format_order(row: sqlite3.Row, *, full: bool = False) -> str:
@@ -163,6 +209,9 @@ def menu() -> dict:
         "keyboard": [
             [{"text": "🌐 Veb-sayt"}, {"text": "🤖 Telegram-bot"}],
             [{"text": "📱 Mini App"}, {"text": "⚙️ Avtomatlashtirish"}],
+            [{"text": "📋 Xizmatlar va narxlar"}],
+            [{"text": "📦 Buyurtmalarim"}, {"text": "💬 Aloqa"}],
+            [{"text": "🏠 Menyu"}],
         ],
         "resize_keyboard": True,
         "one_time_keyboard": False,
@@ -235,16 +284,42 @@ def handle_message(
                 pass
         return
 
-    if text == "/id":
+    if command == "/id":
         api.message(chat_id, f"Telegram chat ID: {chat_id}")
         return
 
-    if text.startswith("/cancel"):
+    if command == "/services" or text == "📋 Xizmatlar va narxlar":
+        sessions.pop(chat_id, None)
+        api.message(chat_id, services_catalog(), keyboard=menu())
+        return
+
+    if command == "/myorders" or text == "📦 Buyurtmalarim":
+        sessions.pop(chat_id, None)
+        api.message(chat_id, format_customer_orders(customer_orders(con, chat_id)), keyboard=menu())
+        return
+
+    if command == "/contact" or text == "💬 Aloqa":
+        sessions.pop(chat_id, None)
+        api.message(
+            chat_id,
+            "💬 ELYOR.DEV bilan bog‘lanish:\n"
+            f"https://t.me/{CONTACT_USERNAME}\n\n"
+            "Buyurtmani bot orqali ham yuborishingiz mumkin.",
+            keyboard=menu(),
+        )
+        return
+
+    if text == "🏠 Menyu" or command == "/menu":
+        sessions.pop(chat_id, None)
+        api.message(chat_id, WELCOME, keyboard=menu())
+        return
+
+    if command == "/cancel":
         sessions.pop(chat_id, None)
         api.message(chat_id, "Bekor qilindi. Qaytadan xizmat tanlashingiz mumkin.", keyboard=menu())
         return
 
-    if text.startswith("/start") or text.startswith("/help"):
+    if command in {"/start", "/help"}:
         sessions.pop(chat_id, None)
         greeting = WELCOME
         if chat_id == admin_chat_id:
@@ -259,6 +334,8 @@ def handle_message(
         api.message(
             chat_id,
             f"Tanlandi: {SERVICES[text]}\n"
+            f"{SERVICE_DESCRIPTIONS[SERVICES[text]]}\n"
+            "Narx: loyiha talablariga qarab kelishiladi.\n\n"
             "Nima kerakligini qisqacha tushuntiring (8–700 ta belgi). "
             "Telefon yoki boshqa maxfiy ma’lumotlarni yuborish shart emas.",
             keyboard=hide_menu(),
