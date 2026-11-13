@@ -83,7 +83,7 @@ class TestOrders(unittest.TestCase):
         self.assertIn("Assalomu alaykum", send(111, "🏠 Menyu"))
         self.assertIn("Telegram-bot", send(111, "🤖 Telegram-bot"))
         self.assertEqual(sessions[111]["service"], "Telegram-bot")
-        self.assertIn("Telegram", send(111, "/contact"))
+        self.assertIn("https://t.me/eywn88", send(111, "/contact"))
         self.assertNotIn(111, sessions)
 
     def test_offset(self):
