@@ -26,11 +26,27 @@ SERVICES = {
     "⚙️ Avtomatlashtirish": "Avtomatlashtirish",
 }
 SERVICE_DESCRIPTIONS = {
-    "Veb-sayt": "Portfolio, biznes sayti yoki xizmatlar sahifasi.",
-    "Telegram-bot": "Buyurtma qabul qilish, javoblar va oddiy avtomatlashtirish.",
-    "Mini App": "Telegram ichida ochiladigan kichik veb-ilova.",
-    "Avtomatlashtirish": "Takroriy vazifalarni soddalashtiradigan yechimlar.",
+    "Veb-sayt": "1 sahifali moslashuvchan landing: xizmatlar, aloqa va buyurtma havolasi.",
+    "Telegram-bot": "Tugmali menyu, oddiy buyurtma qabul qilish va administratorga bildirishnoma.",
+    "Mini App": "Telegram ichidagi boshlang‘ich 2–3 ekranli MVP: katalog yoki forma.",
+    "Avtomatlashtirish": "Bitta sodda jarayon: masalan, Telegram so‘rovini jadvalga yozish.",
 }
+STARTING_PRICES = {
+    "Veb-sayt": 990_000,
+    "Telegram-bot": 550_000,
+    "Mini App": 1_590_000,
+    "Avtomatlashtirish": 990_000,
+}
+
+
+def starting_price(service: str) -> str:
+    return f"{STARTING_PRICES[service]:,}".replace(",", " ") + " so‘mdan"
+
+
+PRICE_NOTE = (
+    "Boshlang‘ich narx kichik MVP uchun; yakuniy narx ish hajmiga qarab tasdiqlanadi. "
+    "Hosting, domen, pullik API va murakkab integratsiyalar alohida."
+)
 CONTACT_USERNAME = "eywn88"
 
 
@@ -39,10 +55,10 @@ def services_catalog() -> str:
     for title, service in SERVICES.items():
         lines.append(
             f"\n{title}\n{SERVICE_DESCRIPTIONS[service]}\n"
-            "Narx: loyiha talablariga qarab kelishiladi."
+            f"Boshlang‘ich narx: {starting_price(service)}"
         )
     lines.append(
-        "\nBuyurtma berish uchun menyudan xizmatni tanlang."
+        "\n" + PRICE_NOTE + "\nBuyurtma berish uchun menyudan xizmatni tanlang."
         "\n💬 Aloqa: https://t.me/" + CONTACT_USERNAME
     )
     return "\n".join(lines)
@@ -52,7 +68,8 @@ WELCOME = (
     "Assalomu alaykum! 👋\n"
     "Bu biznes uchun buyurtma qabul qiluvchi demo-bot.\n"
     "Quyidagi xizmatlardan birini tanlang.\n\n"
-    "Narxlar loyiha talabiga qarab kelishiladi.\n\n"
+    "Birinchi mijozlar uchun arzon boshlang‘ich narxlar!\n" 
+    "Narxlarni ko‘rish: /services\n\n"
     "/services — xizmatlar\n"
     "/myorders — buyurtmalarim\n"
     "/contact — aloqa\n"
@@ -335,7 +352,8 @@ def handle_message(
             chat_id,
             f"Tanlandi: {SERVICES[text]}\n"
             f"{SERVICE_DESCRIPTIONS[SERVICES[text]]}\n"
-            "Narx: loyiha talablariga qarab kelishiladi.\n\n"
+            f"Boshlang‘ich narx: {starting_price(SERVICES[text])}\n"
+            f"{PRICE_NOTE}\n\n"
             "Nima kerakligini qisqacha tushuntiring (8–700 ta belgi). "
             "Telefon yoki boshqa maxfiy ma’lumotlarni yuborish shart emas.",
             keyboard=hide_menu(),
