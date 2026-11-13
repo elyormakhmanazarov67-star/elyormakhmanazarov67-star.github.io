@@ -205,6 +205,10 @@ def handle_message(
                 pass
         return
 
+    if text == "/id":
+        api.message(chat_id, f"Telegram chat ID: {chat_id}")
+        return
+
     if text.startswith("/cancel"):
         sessions.pop(chat_id, None)
         api.message(chat_id, "Bekor qilindi. Qaytadan xizmat tanlashingiz mumkin.", keyboard=menu())
