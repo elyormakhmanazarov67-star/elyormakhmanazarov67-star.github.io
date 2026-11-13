@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#091611">
+<meta name="description" content="Interactive Telegram Business Bot demo: try customer orders and admin workflow in a browser. A portfolio prototype, not a live Telegram bot.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://elyormakhmanazarov67-star.github.io/business-bot-demo.html">
+<title>Business Bot Demo — ELYOR.DEV</title>
+<style>
+:root{color-scheme:dark;--bg:#07140e;--panel:#0e2118;--panel2:#122c20;--line:#264737;--green:#65e6a7;--green2:#3dcc8c;--text:#edf7ee;--muted:#abc1b1;--dark:#061a11;--amber:#f5cb78;--shadow:0 25px 65px rgba(0,0,0,.28)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 80% -4%,#1b4b30 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.55}
+button,input,textarea,select{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.wrap{max-width:1240px;margin:auto;padding:0 24px}
+.top{border-bottom:1px solid var(--line);background:rgba(7,20,14,.83);position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}
+.top-inner{min-height:70px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:17px;font-weight:850;letter-spacing:-.6px}.brand b{color:var(--green)}
+.top-right{display:flex;align-items:center;gap:10px}
+select.lang{background:var(--panel);color:var(--text);border:1px solid var(--line);padding:10px;border-radius:8px}
+.back{color:var(--muted);font-size:13px}.back:hover{color:var(--green)}
+.hero{padding:56px 0 30px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end}
+.eyebrow{font-size:11px;text-transform:uppercase;color:var(--green);letter-spacing:2px;font-weight:800}
+h1{font-size:clamp(36px,5vw,64px);line-height:1.07;letter-spacing:-2.8px;margin:15px 0}
+.lead{color:var(--muted);max-width:700px;margin:0;line-height:1.8}
+.pill{border:1px solid #467357;background:#163a27;border-radius:100px;padding:8px 13px;color:var(--green);font-size:12px;font-weight:700;white-space:nowrap}
+.notice{border:1px solid #567248;background:#21341b;color:#e7edc7;padding:12px 16px;border-radius:11px;font-size:13px;margin:12px 0 24px}
+.grid{display:grid;grid-template-columns:minmax(340px,.88fr) minmax(0,1.12fr);align-items:start;gap:25px;padding-bottom:54px}
+.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#10271b,#0c2016);box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.card-title{font-weight:800}.small{color:var(--muted);font-size:12px}
+.live{font:700 11px "Segoe UI",sans-serif;color:var(--green);display:inline-flex;align-items:center;gap:7px}
+.live:before{content:"";background:var(--green);border-radius:50%;width:7px;height:7px}
+.phone-wrap{padding:24px;display:flex;justify-content:center}
+.phone{max-width:380px;width:100%;background:#0c1718;border:7px solid #1f3831;border-radius:30px;overflow:hidden;min-height:610px;display:flex;flex-direction:column}
+.chat-head{background:#1b3936;display:flex;align-items:center;gap:12px;padding:15px;font-size:13px;font-weight:800}
+.avatar{background:#32795b;color:white;border-radius:50%;height:35px;width:35px;display:grid;place-items:center;font-size:17px}
+.chat-main{background:radial-gradient(circle at 35% 40%,#162927,#0b1918);padding:17px 13px;flex:1;min-height:290px;max-height:330px;overflow:auto;display:flex;flex-direction:column;gap:11px}
+.bubble{font-size:12px;line-height:1.6;max-width:92%;padding:10px 13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.bubble.bot{background:#22372e;align-self:start;border-radius:11px 11px 11px 3px}
+.bubble.me{background:#256949;align-self:end;border-radius:11px 11px 3px 11px}
+.phone-form{padding:13px;background:#0d211d;display:grid;gap:10px}
+.field{display:grid;gap:6px}.field label{font-size:11px;color:#c4d9ce;font-weight:700}
+.field select,.field textarea{width:100%;border-radius:9px;background:#1a3328;border:1px solid #42634f;color:#fff;padding:11px;font-size:13px}
+.field textarea{min-height:70px;resize:vertical}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;font-size:13px;font-weight:800;padding:12px 17px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--text)}
+.btn-primary{background:var(--green);border-color:var(--green);color:var(--dark)}
+.btn-primary:hover{background:#a0ffca}.btn-secondary:hover{border-color:var(--green)}
+.right-stack{display:grid;gap:18px}
+.toolbar{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.counter{font-size:30px;line-height:1;font-weight:900;color:var(--green)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filter{background:transparent;border:1px solid var(--line);padding:7px 12px;color:var(--muted);border-radius:8px;font-size:12px}
+.filter.active{background:#265e42;border-color:#3fa872;color:#fff}
+.orders{display:grid;gap:12px;padding:0 20px 20px;max-height:520px;overflow:auto}
+.order{background:#152a20;border:1px solid var(--line);border-radius:12px;padding:16px}
+.order-top,.order-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.order-top strong{font-size:14px}.order p{font-size:13px;color:#d5e4d8;margin:12px 0;overflow-wrap:anywhere}
+.status{font-size:11px;font-weight:800;border-radius:20px;padding:5px 9px;border:1px solid #9f8841;color:var(--amber)}
+.status.done{border-color:#4d9972;color:var(--green)}
+.order-bottom .small{font-size:11px}
+.action{font-size:12px;background:#254b37;color:#caffde;border:1px solid #396f50;border-radius:8px;padding:7px 12px}
+.action:hover{background:#336648}.action:disabled{opacity:.5;cursor:default}
+.empty{color:var(--muted);text-align:center;padding:38px 12px;font-size:13px}
+.stats{padding:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.metric{padding:15px;background:#10271b;border:1px solid var(--line);border-radius:10px}
+.metric strong{display:block;font-size:28px;color:#f5fff7}.metric span{font-size:11px;color:var(--muted)}
+.actionsbar{display:flex;gap:10px;padding:0 20px 20px;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:23px 0 36px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+.toast{position:fixed;z-index:20;bottom:22px;right:22px;max-width:340px;background:#246343;border:1px solid #54ba7c;border-radius:10px;box-shadow:var(--shadow);padding:12px 16px;color:#fff;font-size:13px;opacity:0;pointer-events:none;transform:translateY(15px);transition:.2s}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:860px){.grid{grid-template-columns:1fr}.phone-wrap{padding:18px}.hero{grid-template-columns:1fr}.phone{max-width:420px;min-height:560px}.chat-main{max-height:300px}}
+@media(max-width:480px){.wrap{padding:0 15px}.top-inner{min-height:60px}.brand{font-size:15px}.back{font-size:11px}h1{letter-spacing:-1.6px}.phone{border-width:5px}.stats{gap:7px;padding:14px}.metric{padding:12px}.metric strong{font-size:23px}.orders{padding:0 14px 15px}.top-right{gap:7px}.card-head{padding:15px}.notice{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner"><a class="brand" href="./index.html">ELYOR<b>.DEV</b></a><div class="top-right"><a class="back" href="./index.html#projects" data-t="back">← Portfolioga qaytish</a><select class="lang" id="lang" aria-label="Language"><option value="uz">UZ</option><option value="ru">RU</option><option value="en">EN</option></select></div></div></header>
+<main class="wrap">
+<section class="hero"><div><span class="eyebrow" data-t="eyebrow">INTERAKTIV NAMUNA / TELEGRAM BUSINESS BOT</span><h1 data-t="heading">Buyurtmadan boshqaruvgacha.</h1><p class="lead" data-t="lead">Mijoz xizmat tanlaydi va so‘rov yuboradi. Administrator so‘rovni ko‘radi, bajarilgan deb belgilaydi. Jarayonni shu sahifaning o‘zida sinab ko‘ring.</p></div><span class="pill" data-t="demoPill">● BRAUZER DEMOSI</span></section>
+<p class="notice" data-t="notice">Eslatma: bu Telegram’ning jonli boti emas, balki uning ishlash jarayonini ko‘rsatuvchi interaktiv brauzer namunasidir. Haqiqiy shaxsiy ma’lumotlarni kiritmang. Ma’lumotlar faqat shu sahifada vaqtincha turadi.</p>
+<div class="grid">
+<section class="card" aria-labelledby="customerTitle"><div class="card-head"><span class="card-title" id="customerTitle" data-t="customer">01 / Mijoz tomoni</span><span class="live" data-t="simulated">Simulyatsiya</span></div><div class="phone-wrap">
+<div class="phone">
+<div class="chat-head"><span class="avatar">✦</span><span>Business Assistant<br><span class="small" data-t="botOnline">Demo bot · onlayn</span></span></div>
+<div class="chat-main" id="chat" aria-live="polite" aria-label="Demo conversation"></div>
+<form class="phone-form" id="orderForm">
+<div class="field"><label for="service" data-t="chooseService">Xizmatni tanlang</label><select id="service" required><option value="" data-t="selectOne">Xizmatni tanlang</option><option value="website" data-t="website">Veb-sayt</option><option value="telegram" data-t="telegram">Telegram-bot</option><option value="miniapp" data-t="miniapp">Mini App</option><option value="automation" data-t="automation">Avtomatlashtirish</option></select></div>
+<div class="field"><label for="details" data-t="detailsLabel">Qisqacha vazifani yozing</label><textarea id="details" maxlength="220" minlength="8" required data-placeholder="detailsPlaceholder" placeholder="Masalan: kurslarga yozilish uchun bot kerak."></textarea></div>
+<button class="btn btn-primary" type="submit"><span data-t="submit">So‘rov yuborish</span> ↗</button>
+</form></div></div></section>
+<div class="right-stack">
+<section class="card" aria-labelledby="adminTitle"><div class="card-head"><span class="card-title" id="adminTitle" data-t="admin">02 / Administrator paneli</span><span class="live" data-t="liveUpdate">Jonli yangilanadi</span></div>
+<div class="toolbar"><div><div class="small" data-t="orders">Barcha so‘rovlar</div><div class="counter" id="totalCount">0</div></div><div class="filters" role="group" aria-label="Filter orders"><button type="button" class="filter active" data-filter="all" data-t="all">Hammasi</button><button type="button" class="filter" data-filter="new" data-t="new">Yangi</button><button type="button" class="filter" data-filter="done" data-t="done">Bajarilgan</button></div></div>
+<div class="orders" id="orderList" aria-live="polite"></div>
+<div class="actionsbar"><button type="button" class="btn btn-secondary" id="reset"><span data-t="reset">Demo ma’lumotlarini tiklash</span> ↺</button></div>
+</section>
+<section class="card"><div class="card-head"><span class="card-title" data-t="stats">03 / Statistika</span><span class="small" data-t="mock">Namuna ma’lumotlar</span></div><div class="stats"><div class="metric"><strong id="statTotal">0</strong><span data-t="statTotal">Jami</span></div><div class="metric"><strong id="statNew">0</strong><span data-t="statNew">Yangi</span></div><div class="metric"><strong id="statDone">0</strong><span data-t="statDone">Bajarilgan</span></div></div></section>
+</div></div></main>
+<footer class="wrap"><span data-t="footerInfo">Ko‘rsatma: so‘rov yuboring va uni administrator panelida yakunlang. Bu ma’lumotlar haqiqiy mijozlardan olinmagan.</span><a href="https://t.me/eywn88" target="_blank" rel="noopener noreferrer" data-t="contact">Loyihani muhokama qilish ↗</a></footer><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+'use strict';
+var dict={
+uz:{back:'← Portfolioga qaytish',eyebrow:'INTERAKTIV NAMUNA / TELEGRAM BUSINESS BOT',heading:'Buyurtmadan boshqaruvgacha.',lead:'Mijoz xizmat tanlaydi va so‘rov yuboradi. Administrator so‘rovni ko‘radi, bajarilgan deb belgilaydi. Jarayonni shu sahifaning o‘zida sinab ko‘ring.',demoPill:'● BRAUZER DEMOSI',notice:'Eslatma: bu Telegram’ning jonli boti emas, balki uning ishlash jarayonini ko‘rsatuvchi interaktiv brauzer namunasidir. Haqiqiy shaxsiy ma’lumotlarni kiritmang. Ma’lumotlar faqat shu sahifada vaqtincha turadi.',customer:'01 / Mijoz tomoni',simulated:'Simulyatsiya',botOnline:'Demo bot · onlayn',chooseService:'Xizmatni tanlang',selectOne:'Xizmatni tanlang',website:'Veb-sayt',telegram:'Telegram-bot',miniapp:'Mini App',automation:'Avtomatlashtirish',detailsLabel:'Qisqacha vazifani yozing',detailsPlaceholder:'Masalan: kurslarga yozilish uchun bot kerak.',submit:'So‘rov yuborish',admin:'02 / Administrator paneli',liveUpdate:'Jonli yangilanadi',orders:'Barcha so‘rovlar',all:'Hammasi',new:'Yangi',done:'Bajarilgan',reset:'Demo ma’lumotlarini tiklash',stats:'03 / Statistika',mock:'Namuna ma’lumotlar',statTotal:'Jami',statNew:'Yangi',statDone:'Bajarilgan',footerInfo:'Ko‘rsatma: so‘rov yuboring va uni administrator panelida yakunlang. Bu ma’lumotlar haqiqiy mijozlardan olinmagan.',contact:'Loyihani muhokama qilish ↗',welcome:'Assalomu alaykum! Qanday xizmatga buyurtma bermoqchisiz?',sent:'Yangi so‘rov qabul qilindi! Administrator panelini tekshiring.',doneAction:'Bajarildi deb belgilash',doneInfo:'Bajarilgan',empty:'Bu filtrda so‘rov yo‘q.',toastCreated:'So‘rov administrator paneliga qo‘shildi!',toastDone:'So‘rov bajarildi deb belgilandi.',toastReset:'Demo boshidan tiklandi.',example1:'Demo: kursga yozilish uchun bot.',example2:'Demo: xizmatlar sayti.',dateLabel:'Namuna',serviceLabel:'Xizmat',requestLabel:'So‘rov',newStatus:'Yangi',doneStatus:'Bajarilgan',demoNote:'Faqat demo'},
+ru:{back:'← К портфолио',eyebrow:'ИНТЕРАКТИВНЫЙ ПРИМЕР / TELEGRAM BUSINESS BOT',heading:'От заявки до выполнения.',lead:'Клиент выбирает услугу и отправляет запрос. Администратор видит заявку и отмечает её выполненной. Попробуйте процесс прямо здесь.',demoPill:'● БРАУЗЕРНОЕ ДЕМО',notice:'Важно: это не действующий Telegram-бот, а интерактивная демонстрация его сценария в браузере. Не вводите настоящие личные данные. Данные существуют только на этой странице.',customer:'01 / Клиент',simulated:'Симуляция',botOnline:'Демо-бот · онлайн',chooseService:'Выберите услугу',selectOne:'Выберите услугу',website:'Сайт',telegram:'Telegram-бот',miniapp:'Mini App',automation:'Автоматизация',detailsLabel:'Кратко опишите задачу',detailsPlaceholder:'Например: нужен бот для записи на курсы.',submit:'Отправить заявку',admin:'02 / Панель администратора',liveUpdate:'Обновляется сразу',orders:'Все заявки',all:'Все',new:'Новые',done:'Готовые',reset:'Сбросить демо',stats:'03 / Статистика',mock:'Пример данных',statTotal:'Всего',statNew:'Новых',statDone:'Готово',footerInfo:'Как проверить: отправьте заявку и завершите её в панели администратора. Реальные клиенты здесь не участвуют.',contact:'Обсудить проект ↗',welcome:'Здравствуйте! Какую услугу вы хотите заказать?',sent:'Новая заявка получена! Посмотрите панель администратора.',doneAction:'Отметить выполненной',doneInfo:'Выполнено',empty:'По этому фильтру заявок нет.',toastCreated:'Заявка добавлена в панель администратора!',toastDone:'Заявка отмечена выполненной.',toastReset:'Демо сброшено.',example1:'Демо: бот для записи на курсы.',example2:'Демо: сайт услуг.',dateLabel:'Пример',serviceLabel:'Услуга',requestLabel:'Заявка',newStatus:'Новая',doneStatus:'Готово',demoNote:'Только демо'},
+en:{back:'← Back to portfolio',eyebrow:'INTERACTIVE SAMPLE / TELEGRAM BUSINESS BOT',heading:'From request to delivery.',lead:'A customer chooses a service and submits a request. An admin sees the request and marks it completed. Try the whole workflow here.',demoPill:'● BROWSER DEMO',notice:'Important: this is an interactive browser simulation, not a live Telegram bot. Do not enter real personal details. Data exists only on this page.',customer:'01 / Customer side',simulated:'Simulation',botOnline:'Demo bot · online',chooseService:'Select a service',selectOne:'Select a service',website:'Website',telegram:'Telegram bot',miniapp:'Mini App',automation:'Automation',detailsLabel:'Briefly describe your request',detailsPlaceholder:'For example: a bot for course sign-ups.',submit:'Submit request',admin:'02 / Admin dashboard',liveUpdate:'Updates instantly',orders:'All requests',all:'All',new:'New',done:'Completed',reset:'Reset demo data',stats:'03 / Statistics',mock:'Sample data',statTotal:'Total',statNew:'New',statDone:'Completed',footerInfo:'How to test: submit a request and complete it in the admin dashboard. No real client data is used.',contact:'Discuss a project ↗',welcome:'Hello! Which service would you like to request?',sent:'Request received! Check the admin dashboard.',doneAction:'Mark completed',doneInfo:'Completed',empty:'No requests match this filter.',toastCreated:'Request added to the admin dashboard!',toastDone:'Request marked completed.',toastReset:'Demo reset.',example1:'Demo: course booking bot.',example2:'Demo: services website.',dateLabel:'Sample',serviceLabel:'Service',requestLabel:'Request',newStatus:'New',doneStatus:'Completed',demoNote:'Demo only'}
+};
+var lang='uz', filter='all', nextId=3, records=[];
+var $=function(id){return document.getElementById(id);};
+function t(k){return dict[lang][k]||k;}
+function demoRecords(){return[{id:1,service:'telegram',details:t('example1'),status:'new',created:'—'},{id:2,service:'website',details:t('example2'),status:'done',created:'—'}];}
+function addBubble(kind,text){var el=document.createElement('div');el.className='bubble '+kind;el.textContent=text;$('chat').appendChild(el);$('chat').scrollTop=$('chat').scrollHeight;}
+function setToast(text){var el=$('toast');el.textContent=text;el.classList.add('show');window.clearTimeout(setToast.timer);setToast.timer=window.setTimeout(function(){el.classList.remove('show');},2800);}
+function render(){
+$('totalCount').textContent=String(records.length);$('statTotal').textContent=String(records.length);$('statNew').textContent=String(records.filter(function(r){return r.status==='new';}).length);$('statDone').textContent=String(records.filter(function(r){return r.status==='done';}).length);
+var root=$('orderList');root.replaceChildren();
+var items=records.filter(function(r){return filter==='all'||r.status===filter;}).slice().reverse();
+if(!items.length){var empty=document.createElement('div');empty.className='empty';empty.textContent=t('empty');root.appendChild(empty);return;}
+items.forEach(function(r){
+var card=document.createElement('article');card.className='order';
+var head=document.createElement('div');head.className='order-top';
+var label=document.createElement('strong');label.textContent='#'+String(r.id).padStart(3,'0')+' · '+t(r.service);
+var status=document.createElement('span');status.className='status'+(r.status==='done'?' done':'');status.textContent=t(r.status==='done'?'doneStatus':'newStatus');head.append(label,status);
+var body=document.createElement('p');body.textContent=r.details;
+var foot=document.createElement('div');foot.className='order-bottom';
+var time=document.createElement('span');time.className='small';time.textContent=r.created==='—'?t('demoNote'):r.created;
+var button=document.createElement('button');button.type='button';button.className='action';button.textContent=r.status==='done'?t('doneInfo'):t('doneAction');
+button.disabled=r.status==='done';button.addEventListener('click',function(){r.status='done';render();setToast(t('toastDone'));});
+foot.append(time,button);card.append(head,body,foot);root.appendChild(card);
+});
+}
+function reset(){records=demoRecords();nextId=3;filter='all';document.querySelectorAll('.filter').forEach(function(b){b.classList.toggle('active',b.dataset.filter==='all');});$('orderForm').reset();$('chat').replaceChildren();addBubble('bot',t('welcome'));render();}
+function setLang(next){if(!dict[next])return;lang=next;document.documentElement.lang=next;document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=t(el.dataset.t);});document.querySelectorAll('[data-placeholder]').forEach(function(el){el.placeholder=t(el.dataset.placeholder);});$('lang').value=lang;document.title='Business Bot Demo — ELYOR.DEV';reset();}
+$('lang').addEventListener('change',function(){setLang(this.value);});
+document.querySelectorAll('.filter').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;document.querySelectorAll('.filter').forEach(function(x){x.classList.toggle('active',x===b);});render();});});
+$('reset').addEventListener('click',function(){reset();setToast(t('toastReset'));});
+$('orderForm').addEventListener('submit',function(e){e.preventDefault();var type=$('service').value,desc=$('details').value.trim();if(!['website','telegram','miniapp','automation'].includes(type)){$('service').focus();return;}if(desc.length<8){$('details').focus();return;}
+records.push({id:nextId++,service:type,details:desc,status:'new',created:new Date().toLocaleTimeString(lang==='uz'?'uz-UZ':lang==='ru'?'ru-RU':'en-US',{hour:'2-digit',minute:'2-digit'})});
+addBubble('me',t(type)+'\n'+desc);addBubble('bot',t('sent'));$('orderForm').reset();filter='all';document.querySelectorAll('.filter').forEach(function(b){b.classList.toggle('active',b.dataset.filter==='all');});render();setToast(t('toastCreated'));});
+setLang('uz');
+})();
+</script>
+</body>
+</html>
