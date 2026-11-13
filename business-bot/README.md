@@ -32,7 +32,7 @@ Python 3.10+, Python standard library, sqlite3, Telegram Bot API (long polling).
     $env:ADMIN_CHAT_ID = "YOUR_NUMERIC_CHAT_ID"
     py bot.py
 
-   Administrator ID raqamingizni bilmasangiz, botni boshlang, /id yuboring va uni oling. Admin ID ni yangilab, dasturni qayta ishga tushiring.
+   Administrator chat ID raqamingizni bilmasangiz, avval ADMIN_CHAT_ID uchun vaqtincha 0 qiymatini yozing, botni ishga tushirib o‘zingiz unga /id yuboring. Raqamni olgach Ctrl+C bilan to‘xtating va ADMIN_CHAT_ID ni shu raqamga almashtirib qayta ishga tushiring.
 5. Telegram botga /start yuboring, xizmat tanlang va faqat demo ma’lumotlar bilan sinab ko‘ring.
 6. Administrator sifatida /orders, /stats, /done 1 buyruqlarini tekshiring.
 
